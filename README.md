@@ -1,6 +1,6 @@
 
 
-A modern AI-powered E-Commerce web application built using React, TypeScript, and Vite.
+A modern E-Commerce web application built using React, TypeScript, and Vite.
 
 ## 🚀 Features
 
@@ -37,11 +37,7 @@ src/
 
 ## ⚙️ Installation
 
-Clone the repository:
 
-```bash
-git clone <your-repo-link>
-```
 
 Go to project folder:
 
@@ -63,16 +59,6 @@ npm run dev
 
 ---
 
-## 🌐 Environment Variables
-
-Create a `.env` file:
-
-```env
-VITE_SUPABASE_URL=your_url
-VITE_SUPABASE_ANON_KEY=your_key
-```
-
----
 
 ## 🎯 Learning Objectives
 
