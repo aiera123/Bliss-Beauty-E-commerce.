@@ -7,7 +7,7 @@ export default function Home() {
       
       {/* Hero Section */}
       <div className="text-center py-16 bg-white text-black">
-        <h1 className="text-4xl font-bold">Welcome to My Shop 🛒</h1>
+        <h1 className="text-4xl font-bold">Welcome to My Shop </h1>
         <p className="mt-2 text-gray-600">
           Best products at affordable prices
         </p>

@@ -9,71 +9,73 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-export default function SearchAppBar({ search, setSearch }) {
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  borderRadius: "8px",
+  backgroundColor: alpha("#fff", 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha("#fff", 0.25),
   },
-  marginLeft: 10,
   width: "100%",
   maxWidth: 500,
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+const SearchIconWrapper = styled("div")({
+  padding: "0 12px",
   height: "100%",
   position: "absolute",
-  pointerEvents: "none",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-}));
+});
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styled(InputBase)({
   color: "inherit",
   width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-  },
-}));
+  paddingLeft: "40px",
+});
 
-export default function SearchAppBar({ search, setSearch }  ) {
+export default function SearchAppBar({ search, setSearch }) {
   return (
-    
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ background: "#1976d2" }}>
         <Toolbar>
-            <StyledInputBase placeholder="Search products..." value={search} onChange={(e) => setSearch(e.target.value)}/>
 
-          {/* Menu */}
+          {/* LEFT - MENU + BRAND */}
           <IconButton size="large" edge="start" color="inherit">
             <MenuIcon />
           </IconButton>
 
-          {/* Logo */}
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            sx={{ display: "flex", alignItems: "center", mr: 3 }}
+          >
             Bliss & Beauty 
           </Typography>
 
-          {/* Search Bar */}
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
+          {/* CENTER - SEARCH */}
+          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
 
-            <StyledInputBase
-              placeholder="Search products..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+              <StyledInputBase
+                placeholder="Search products..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </Search>
+          </Box>
 
-          {/* Cart Icon */}
-          <IconButton size="large" color="inherit">
+          {/* RIGHT - ICONS */}
+          <IconButton color="inherit">
+            <AccountCircleIcon />
+          </IconButton>
+
+          <IconButton color="inherit">
             <ShoppingCartIcon />
           </IconButton>
 
