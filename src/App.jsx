@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import CategoryNav from "./components/CategoryNav";
 import Cart from "./pages/cart";
 import ProductDetails from "./pages/ProductDetails";
+import Account from "./pages/Account";
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/products" element={<Product search={search} />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </CartProvider>
     </BrowserRouter>
