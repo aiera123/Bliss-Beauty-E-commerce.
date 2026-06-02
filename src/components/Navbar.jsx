@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar({ search, setSearch }) {
   const { cart } = useCart();
@@ -20,11 +16,9 @@ export default function Navbar({ search, setSearch }) {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-1.5 rounded-lg hover:bg-white/10 transition md:hidden"
-            aria-label="Menu"
           >
-            <MenuIcon />
+            ☰
           </button>
-
           <span
             onClick={() => navigate("/")}
             className="text-xl font-bold cursor-pointer tracking-tight hover:opacity-90 transition whitespace-nowrap"
@@ -33,24 +27,23 @@ export default function Navbar({ search, setSearch }) {
           </span>
         </div>
 
-        {/* CENTER — Search bar */}
+        {/* CENTER — Search */}
         <div className="flex-1 flex justify-center">
           <div className="relative w-full max-w-lg">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none">
-              <SearchIcon fontSize="small" />
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none text-sm">
+              🔍
             </span>
             <input
               type="text"
               placeholder="Search products..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white/15 hover:bg-white/25 focus:bg-white/25 text-white placeholder-white/60 rounded-lg pl-10 pr-4 py-2 text-sm outline-none transition"
+              className="w-full bg-white/15 hover:bg-white/25 focus:bg-white/25 text-white placeholder-white/60 rounded-lg pl-9 pr-8 py-2 text-sm outline-none transition"
             />
             {search && (
               <button
                 onClick={() => setSearch("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-lg leading-none"
-                aria-label="Clear search"
               >
                 ×
               </button>
@@ -60,50 +53,40 @@ export default function Navbar({ search, setSearch }) {
 
         {/* RIGHT — Cart + Account */}
         <div className="flex items-center gap-1 flex-shrink-0">
-          {/* Cart */}
           <button
             onClick={() => navigate("/cart")}
-            className="relative p-2 rounded-lg hover:bg-white/10 transition"
-            aria-label="Cart"
+            className="relative p-2 rounded-lg hover:bg-white/10 transition text-xl"
           >
-            <ShoppingCartIcon />
+            🛒
             {cart.length > 0 && (
-              <span className="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+              <span className="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                 {cart.length > 9 ? "9+" : cart.length}
               </span>
             )}
           </button>
 
-          {/* Account */}
           <button
             onClick={() => navigate("/account")}
-            className="p-2 rounded-lg hover:bg-white/10 transition"
-            aria-label="Account"
+            className="p-2 rounded-lg hover:bg-white/10 transition text-xl"
           >
-            <AccountCircleIcon />
+            👩🏻‍💼
           </button>
         </div>
       </div>
 
-      {/* Mobile menu (optional expandable) */}
+      {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-white/20 px-4 py-3 flex flex-col gap-2 bg-[#1565c0]">
-          <button
-            onClick={() => { navigate("/"); setMobileMenuOpen(false); }}
-            className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition"
-          >
+          <button onClick={() => { navigate("/"); setMobileMenuOpen(false); }}
+            className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition">
             🏠 Home
           </button>
-          <button
-            onClick={() => { navigate("/products"); setMobileMenuOpen(false); }}
-            className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition"
-          >
+          <button onClick={() => { navigate("/products"); setMobileMenuOpen(false); }}
+            className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition">
             🛍️ Products
           </button>
-          <button
-            onClick={() => { navigate("/cart"); setMobileMenuOpen(false); }}
-            className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition"
-          >
+          <button onClick={() => { navigate("/cart"); setMobileMenuOpen(false); }}
+            className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition">
             🛒 Cart {cart.length > 0 && `(${cart.length})`}
           </button>
         </div>

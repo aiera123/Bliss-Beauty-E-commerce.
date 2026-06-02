@@ -1,86 +1,78 @@
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-//import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-//import { useNavigate } from "react-router-dom";
-//import CategoryNav from "./CategoryNav";
+import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: "8px",
-  backgroundColor: alpha("#fff", 0.15),
-  "&:hover": { backgroundColor: alpha("#fff", 0.25) },
-  width: "100%",
-  maxWidth: 500,
-}));
-
-const SearchIconWrapper = styled("div")({
-  padding: "0 12px",
-  height: "100%",
-  position: "absolute",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-});
-
-const StyledInputBase = styled(InputBase)({
-  color: "inherit",
-  width: "100%",
-  paddingLeft: "40px",
-});
-
-export default function SearchAppBar({ search, setSearch }) {
+export default function Cart() {
+  const { cart, setCart } = useCart();
   const navigate = useNavigate();
 
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
   return (
-    <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 1100 }}>
-      {/* ── Existing MUI blue top bar (unchanged) ── */}
-      <AppBar position="static" sx={{ background: "#1976d2" }}>
-        <Toolbar>
-          <IconButton size="large" edge="start" color="inherit">
-            <MenuIcon />
-          </IconButton>
+    <div
+      className="min-h-screen p-6"
+      style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 40%, #ede7f6 100%)" }}
+    >
+      <h1 className="text-3xl font-bold text-purple-900 mb-6 text-center">My Cart</h1>
 
-          <Typography
-            variant="h6"
-            sx={{ display: "flex", alignItems: "center", mr: 3, cursor: "pointer" }}
-            onClick={() => navigate("/")}
+      {cart.length === 0 ? (
+        <div className="text-center py-20">
+          <p className="text-5xl mb-4">🛒</p>
+          <p className="text-gray-500 text-lg mb-4">Your cart is empty</p>
+          <button
+            onClick={() => navigate("/products")}
+            className="px-6 py-2 rounded-full text-white font-semibold"
+            style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
           >
-            Bliss &amp; Beauty
-          </Typography>
+            Shop Now
+          </button>
+        </div>
+      ) : (
+        <div className="max-w-2xl mx-auto space-y-4">
+          {cart.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-4 bg-white rounded-2xl p-4 shadow"
+            >
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-16 h-16 object-cover rounded-xl"
+                />
+              )}
+              <div className="flex-1">
+                <p className="font-semibold text-gray-800">{item.name}</p>
+                <p className="text-purple-600 font-medium">Rs. {item.price.toLocaleString()}</p>
+              </div>
+              <button
+                onClick={() => removeFromCart(index)}
+                className="text-red-400 hover:text-red-600 text-sm font-medium transition"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
 
-          <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search products..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </Search>
-          </Box>
+          {/* Total */}
+          <div className="bg-white rounded-2xl p-4 shadow flex justify-between items-center">
+            <span className="font-bold text-gray-800 text-lg">Total</span>
+            <span className="font-bold text-purple-700 text-lg">
+              Rs. {total.toLocaleString()}
+            </span>
+          </div>
 
-          <IconButton color="inherit" onClick={() => navigate("/cart")}>
-            <ShoppingCartIcon />
-          </IconButton>
-
-          <IconButton color="inherit">
-            <AccountCircleIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      {/* ── Category nav with hover dropdowns ── */}
-      <CategoryNav />
-    </Box>
+          <button
+            className="w-full py-3 rounded-full text-white font-semibold text-lg shadow-lg hover:scale-105 transition-all"
+            style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }}
+          >
+            Checkout
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

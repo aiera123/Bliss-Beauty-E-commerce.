@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <CartProvider>          {/* ✅ CartProvider wraps EVERYTHING including Navbar */}
+      <CartProvider>          
         <Navbar search={search} setSearch={setSearch} />
         <CategoryNav />
         <Routes>

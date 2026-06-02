@@ -31,11 +31,11 @@ export default function ProductDetails() {
           </p>
 
           <ul className="space-y-3 text-gray-700 mb-8">
-            <li>✨ Long lasting shine</li>
-            <li>✨ Smooth texture</li>
-            <li>✨ Hydrating formula</li>
-            <li>✨ Perfect glossy finish</li>
-            <li>✨ Lightweight & non-sticky</li>
+            <li> Long lasting shine</li>
+            <li> Smooth texture</li>
+            <li>Hydrating formula</li>
+            <li> Perfect glossy finish</li>
+            <li> Lightweight & non-sticky</li>
           </ul>
 
           <button
