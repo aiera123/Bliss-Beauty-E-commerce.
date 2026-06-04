@@ -1,5 +1,6 @@
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Cart() {
   const { cart, setCart } = useCart();
@@ -49,7 +50,10 @@ export default function Cart() {
                 <p className="text-purple-600 font-medium">Rs. {item.price.toLocaleString()}</p>
               </div>
               <button
-                onClick={() => removeFromCart(index)}
+                onClick={() => {
+                  removeFromCart(index);
+                  toast.success("Removed from cart: " + item.name);
+                }}
                 className="text-red-400 hover:text-red-600 text-sm font-medium transition"
               >
                 Remove

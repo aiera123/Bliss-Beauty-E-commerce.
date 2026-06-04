@@ -14,6 +14,7 @@ import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
 import banner3 from "../assets/banner3.jpg";
 import banner4 from "../assets/banner4.jpg";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const { addToCart } = useCart();
@@ -111,7 +112,10 @@ export default function Home() {
             <p className="text-pink-400 mt-1 text-sm">Shiny & long lasting</p>
             <p className="text-purple-700 font-semibold mt-1">Rs. 499</p>
             <button
-              onClick={() => addToCart({ name: "Lip Gloss", price: 499, image: lipgloss })}
+              onClick={() => {
+                addToCart({ name: "Lip Gloss", price: 499, image: lipgloss });
+                toast.success("Added to cart: Lip Gloss");
+              }}
               className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
               style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
             >
@@ -131,7 +135,10 @@ export default function Home() {
             <p className="text-purple-400 mt-1 text-sm">Soft & glowing skin</p>
             <p className="text-purple-700 font-semibold mt-1">Rs. 799</p>
             <button
-              onClick={() => addToCart({ name: "Face Cream", price: 799, image: facecream })}
+              onClick={() => {
+                addToCart({ name: "Face Cream", price: 799, image: facecream });
+                toast.success("Added to cart: Face Cream");
+              }}
               className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
               style={{ background: "linear-gradient(90deg, #ce93d8, #b39ddb)" }}
             >
@@ -151,7 +158,10 @@ export default function Home() {
             <p className="text-indigo-400 mt-1 text-sm">Long lasting fragrance</p>
             <p className="text-purple-700 font-semibold mt-1">Rs. 1,199</p>
             <button
-              onClick={() => addToCart({ name: "Perfume", price: 1199, image: perfume })}
+              onClick={() => {
+                addToCart({ name: "Perfume", price: 1199, image: perfume });
+                toast.success("Added to cart: Perfume");
+              }}
               className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
               style={{ background: "linear-gradient(90deg, #b39ddb, #9fa8da)" }}
             >
@@ -169,7 +179,10 @@ export default function Home() {
             <p className="text-pink-400 mt-1 text-sm">Natural & nourishing</p>
             <p className="text-purple-700 font-semibold mt-1">Rs. 399</p>
             <button
-              onClick={() => addToCart({ name: "Oil", price: 399, image: oil })}
+              onClick={() => {
+                addToCart({ name: "Oil", price: 399, image: oil });
+                toast.success("Added to cart: Oil");
+              }}
               className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
               style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
             >
@@ -188,7 +201,10 @@ export default function Home() {
             <p className="text-pink-400 mt-1 text-sm">Natural flush of color</p>
             <p className="text-purple-700 font-semibold mt-1">Rs. 599</p>
             <button
-              onClick={() => addToCart({ name: "Blush", price: 599, image: blush })}
+              onClick={() => {
+                addToCart({ name: "Blush", price: 599, image: blush });
+                toast.success("Added to cart: Blush");
+              }}
               className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
               style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
             >
@@ -207,7 +223,10 @@ export default function Home() {
             <p className="text-pink-400 mt-1 text-sm">Add a glow to your look</p>
             <p className="text-purple-700 font-semibold mt-1">Rs. 699</p>
             <button
-              onClick={() => addToCart({ name: "Highlighter", price: 699, image: highlighter })}
+              onClick={() => {
+                addToCart({ name: "Highlighter", price: 699, image: highlighter });
+                toast.success("Added to cart: Highlighter");
+              }}
               className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
               style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
             >
