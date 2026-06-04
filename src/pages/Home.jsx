@@ -225,7 +225,7 @@ export default function Home() {
         className="mt-8 py-6 text-center text-sm text-white/70"
         style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }}
       >
-        © 2025 Bliss & Beauty · All rights reserved
+        © 2026 Bliss & Beauty · All rights reserved
       </div>
 
     </div>

@@ -10,7 +10,7 @@ import CategoryNav from "./components/CategoryNav";
 import Cart from "./pages/cart";
 import ProductDetails from "./pages/ProductDetails";
 import Account from "./pages/Account";
-
+ import Signup from "./pages/Signup";
 export default function App() {
   const [search, setSearch] = useState("");
 
@@ -25,6 +25,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </CartProvider>
     </BrowserRouter>
