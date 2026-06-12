@@ -50,7 +50,7 @@ export default function Cart() {
                 <p className="text-purple-600 font-medium">Rs. {item.price.toLocaleString()}</p>
               </div>
               <button
-                onClick={() => {
+                onClick={(e) => {
                   removeFromCart(index);
                   toast.success("Removed from cart: " + item.name);
                 }}

@@ -1,5 +1,7 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { StrapiProvider } from "./context/StrapiContext";
+import { Provider } from "react-redux";
 import { CartProvider } from "./context/CartContext";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
@@ -18,6 +20,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
+    <StrapiProvider>
+       {/* If you set up Redux, wrap with Provider and pass the store */}
+      {/* <Provider store={store}> */}  
       <CartProvider>          
         <Navbar search={search} setSearch={setSearch} />
         <CategoryNav />
@@ -31,6 +36,7 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </CartProvider>
+      </StrapiProvider>
     </BrowserRouter>
   );
 }
