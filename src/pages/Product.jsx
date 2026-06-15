@@ -1,98 +1,37 @@
-// import { useNavigate } from "react-router-dom";
-
-// export default function Product({ search = "" }) {
-
-//   const navigate = useNavigate();
-
-//   const products = [
-//     { id: 1, name: "Lip Gloss", price: "Rs. 500" },
-//     { id: 2, name: "Face Cream", price: "Rs. 800" },
-//     { id: 3, name: "Perfume", price: "Rs. 1200" },
-//     { id: 4, name: "Shampoo", price: "Rs. 600" },
-//     { id: 5, name: "Body Lotion", price: "Rs. 700" },
-//     { id: 6, name: "Foundation", price: "Rs. 900" },
-//   ];
-
-//   const filteredProducts = products.filter((item) =>
-//     item.name.toLowerCase().includes(search.toLowerCase())
-//   );
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 p-8">
-
-//       <h1 className="text-3xl font-bold mb-6 text-center">
-//         Our Products
-//       </h1>
-
-//       {/* No results message */}
-//       {filteredProducts.length === 0 ? (
-
-//         <p className="text-center text-gray-500">
-//           No products found
-//         </p>
-
-//       ) : (
-
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-//           {filteredProducts.map((item) => (
-
-//             <div
-//               key={item.id}
-//               className="bg-white p-4 shadow rounded-lg hover:shadow-lg transition"
-//             >
-
-//               <h2 className="font-semibold text-xl">
-//                 {item.name}
-//               </h2>
-
-//               <p className="text-gray-600">
-//                 {item.price}
-//               </p>
-
-//               <button
-//                 onClick={() => navigate(`/products/${item.id}`)}
-//                 className="mt-3 bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-//               >
-//                 View Details
-//               </button>
-
-//             </div>
-
-//           ))}
-
-//         </div>
-
-//       )}
-
-//     </div>
-//   );
-// }
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import FilterSidebar from "../components/FilterSidebar";
 import SortBar from "../components/SortBar";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
+import lipgloss from "../assets/lipgloss.jpg";
+import facecream from "../assets/facecream.jpg";
+import perfume from "../assets/perfume.jpg";
+import oil from "../assets/oil.jpg";
+import blush from "../assets/blush.jpg";
+import highlighter from "../assets/highlighter.jpg";
 
 const allProducts = [
-  { id: 1, name: "Lip Gloss",     price: 500,  category: "Makeup",      sub: "Lip Color",     brand: "Lakme",         rating: 4.2, skinType: null },
-  { id: 2, name: "Face Cream",    price: 800,  category: "Skin",        sub: "Moisturizers",  brand: "CeraVe",        rating: 4.5, skinType: "Dry" },
-  { id: 3, name: "Perfume",       price: 1200, category: "Fragrances",  sub: "Eau de Parfum", brand: "Neutrogena",    rating: 4.7, skinType: null },
-  { id: 4, name: "Shampoo",       price: 600,  category: "Hair",        sub: "Shampoo",       brand: "Mamaearth",     rating: 4.0, skinType: null },
-  { id: 5, name: "Body Lotion",   price: 700,  category: "Skin",        sub: "Moisturizers",  brand: "Cetaphil",      rating: 3.8, skinType: "Normal" },
-  { id: 6, name: "Foundation",    price: 900,  category: "Makeup",      sub: "Foundation",    brand: "Lakme",         rating: 4.3, skinType: null },
+  { id: 1, name: "Lip Gloss",   price: 499,  category: "Makeup",     sub: "Lip Color",     brand: "Lakme",      rating: 4.2, skinType: null,     image: lipgloss,    desc: "Longlasting, Glossy lip" },
+  { id: 2, name: "Face Cream",  price: 799,  category: "Skin",       sub: "Moisturizers",  brand: "CeraVe",     rating: 4.5, skinType: "Dry",    image: facecream,   desc: "Soft & glowing skin" },
+  { id: 3, name: "Perfume",     price: 1199, category: "Fragrances", sub: "Eau de Parfum", brand: "Neutrogena", rating: 4.7, skinType: null,     image: perfume,     desc: "24 hours Fragrance" },
+  { id: 4, name: "Oil",         price: 399,  category: "Hair",       sub: "Hair Oil",      brand: "Shea Moisture",  rating: 4.0, skinType: null,     image: oil,         desc: "Natural & nourishing" },
+  { id: 5, name: "Blush",       price: 599,  category: "Makeup",     sub: "Blush",         brand: "Lakme",      rating: 3.8, skinType: null,     image: blush,       desc: "Natural flush of color" },
+  { id: 6, name: "Highlighter", price: 699,  category: "Makeup",     sub: "Highlighter",   brand: "KayBeauty",   rating: 4.3, skinType: null,     image: highlighter, desc: "Add a glow to your look" },
 ];
 
 const sortOptions = [
-  { value: "featured",    label: "Featured" },
-  { value: "price_asc",   label: "Price: Low to High" },
-  { value: "price_desc",  label: "Price: High to Low" },
-  { value: "rating",      label: "Top Rated" },
-  { value: "newest",      label: "Newest First" },
+  { value: "featured",   label: "Featured" },
+  { value: "price_asc",  label: "Price: Low to High" },
+  { value: "price_desc", label: "Price: High to Low" },
+  { value: "rating",     label: "Top Rated" },
+  { value: "newest",     label: "Newest First" },
 ];
 
 export default function Product({ search = "" }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { addToCart } = useCart();
 
   const urlCategory = searchParams.get("category") || "";
   const urlSub      = searchParams.get("sub") || "";
@@ -106,7 +45,7 @@ export default function Product({ search = "" }) {
   const [sortBy, setSortBy] = useState("featured");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // ── Apply all filters ──
+  // ── Apply filters ──
   const filtered = allProducts.filter((p) => {
     if (search && !p.name.toLowerCase().includes(search.toLowerCase())) return false;
     if (urlCategory && p.category !== urlCategory) return false;
@@ -128,27 +67,39 @@ export default function Product({ search = "" }) {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Our Products</h1>
+    <div
+      className="min-h-screen p-6"
+      style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 40%, #ede7f6 100%)" }}
+    >
+      {/* Page heading */}
+      <div className="text-center mb-6">
+        <p className="text-purple-400 uppercase tracking-widest text-xs font-semibold mb-1">
+          Explore
+        </p>
+        <h1 className="text-3xl font-bold text-purple-900">Our Products</h1>
+        <div
+          className="mx-auto mt-2 w-16 h-1 rounded-full"
+          style={{ background: "linear-gradient(90deg, #f48fb1, #b39ddb)" }}
+        />
+      </div>
 
       {/* Mobile filter toggle */}
       <button
         onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-        className="mb-4 flex items-center gap-2 text-sm text-blue-600 font-medium border border-blue-200 bg-white rounded-lg px-3 py-2 md:hidden"
+        className="mb-4 flex items-center gap-2 text-sm text-purple-600 font-medium border border-purple-200 bg-white rounded-xl px-4 py-2 md:hidden shadow-sm"
       >
-        <span>⚙️</span>
-        {mobileFilterOpen ? "Hide Filters" : "Show Filters"}
+        ⚙️ {mobileFilterOpen ? "Hide Filters" : "Show Filters"}
       </button>
 
       <div className="flex gap-6 items-start">
-        {/* ── Filter sidebar ── */}
-        <div className={`${mobileFilterOpen ? "block" : "hidden"} md:block`}>
+
+        {/* Sidebar */}
+        <div className={`${mobileFilterOpen ? "block" : "hidden"} md:block flex-shrink-0`}>
           <FilterSidebar filters={filters} onChange={setFilters} />
         </div>
 
-        {/* ── Main product area ── */}
+        {/* Main area */}
         <div className="flex-1 min-w-0">
-          {/* Sort bar */}
           <SortBar
             total={sorted.length}
             sortBy={sortBy}
@@ -165,39 +116,87 @@ export default function Product({ search = "" }) {
               <p className="font-medium text-gray-500">No products found.</p>
               <button
                 onClick={() => setFilters({ skinType: [], brand: [], rating: null, priceMax: 5000 })}
-                className="mt-3 text-sm text-blue-500 hover:underline"
+                className="mt-3 text-sm text-pink-500 hover:underline"
               >
                 Clear all filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
               {sorted.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white p-4 shadow rounded-lg hover:shadow-lg transition"
+                  className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col"
                 >
-                  {/* Product image placeholder */}
-                  <div className="bg-gray-100 rounded-lg h-32 flex items-center justify-center text-4xl mb-3">
-                    🧴
-                  </div>
-
-                  <h2 className="font-semibold text-xl">{item.name}</h2>
-                  <p className="text-gray-500 text-sm">{item.brand}</p>
-
-                  <div className="flex items-center gap-1 my-1">
-                    <span className="text-yellow-400 text-sm">{"★".repeat(Math.round(item.rating))}</span>
-                    <span className="text-xs text-gray-400">({item.rating})</span>
-                  </div>
-
-                  <p className="text-blue-600 font-semibold">Rs. {item.price.toLocaleString()}</p>
-
-                  <button
+                  {/* ── Fixed image container ── */}
+                  <div
+                    className="w-full cursor-pointer overflow-hidden bg-pink-50"
+                    style={{ height: "180px" }}
                     onClick={() => navigate(`/products/${item.id}`)}
-                    className="mt-3 bg-black text-white px-4 py-2 rounded hover:bg-gray-800 w-full"
                   >
-                    View Details
-                  </button>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* ── Card info ── */}
+                  <div className="p-3 flex flex-col flex-1">
+                    {/* Brand */}
+                    <p className="text-xs text-purple-400 font-medium mb-0.5">{item.brand}</p>
+
+                    {/* Name */}
+                    <h2
+                      className="font-bold text-gray-800 text-sm leading-tight mb-1 cursor-pointer hover:text-pink-600 transition line-clamp-1"
+                      onClick={() => navigate(`/products/${item.id}`)}
+                    >
+                      {item.name}
+                    </h2>
+
+                    {/* Description */}
+                    <p className="text-xs text-gray-400 mb-2 line-clamp-1">{item.desc}</p>
+
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 mb-2">
+                      <div className="flex">
+                        {[1,2,3,4,5].map((star) => (
+                          <span
+                            key={star}
+                            className={`text-xs ${star <= Math.round(item.rating) ? "text-yellow-400" : "text-gray-200"}`}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-400">({item.rating})</span>
+                    </div>
+
+                    {/* Price */}
+                    <p className="text-pink-600 font-bold text-sm mb-3">
+                      Rs. {item.price.toLocaleString()}
+                    </p>
+
+                    {/* Buttons — pushed to bottom */}
+                    <div className="flex gap-2 mt-auto">
+                      <button
+                        onClick={() => navigate(`/products/${item.id}`)}
+                        className="flex-1 py-2 rounded-xl text-xs font-semibold border-2 border-purple-200 text-purple-600 hover:bg-purple-50 transition"
+                      >
+                        Details
+                      </button>
+                      <button
+                        onClick={() => {
+                          addToCart({ name: item.name, price: item.price, image: item.image });
+                          toast.success(`Added: ${item.name}`);
+                        }}
+                        className="flex-1 py-2 rounded-xl text-xs font-semibold text-white transition hover:opacity-90"
+                        style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

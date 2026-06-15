@@ -1,11 +1,35 @@
-import { useState } from "react";
+// src/components/Navbar.jsx
+// Shows logged-in user name on account icon, logout option in dropdown
+
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/StrapiContext";
 
 export default function Navbar({ search, setSearch }) {
-  const { cart } = useCart();
+  const { cartCount } = useCart();
+  const { user, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const accountRef = useRef(null);
+
+  // Close account dropdown when clicking outside
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (accountRef.current && !accountRef.current.contains(e.target)) {
+        setAccountMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    setAccountMenuOpen(false);
+    navigate("/");
+  };
 
   return (
     <nav className="bg-[#1976d2] text-white sticky top-0 z-50 shadow-md">
@@ -53,24 +77,77 @@ export default function Navbar({ search, setSearch }) {
 
         {/* RIGHT — Cart + Account */}
         <div className="flex items-center gap-1 flex-shrink-0">
+          {/* Cart */}
           <button
             onClick={() => navigate("/cart")}
             className="relative p-2 rounded-lg hover:bg-white/10 transition text-xl"
           >
             🛒
-            {cart.length > 0 && (
+            {cartCount > 0 && (
               <span className="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                {cart.length > 9 ? "9+" : cart.length}
+                {cartCount > 9 ? "9+" : cartCount}
               </span>
             )}
           </button>
 
-          <button
-            onClick={() => navigate("/account")}
-            className="p-2 rounded-lg hover:bg-white/10 transition text-xl"
-          >
-            👩🏻‍💼
-          </button>
+          {/* Account — dropdown if logged in */}
+          <div className="relative" ref={accountRef}>
+            <button
+              onClick={() => setAccountMenuOpen(!accountMenuOpen)}
+              className="flex items-center gap-1.5 p-2 rounded-lg hover:bg-white/10 transition"
+            >
+              <span className="text-xl">👩🏻‍💼</span>
+              {isLoggedIn && user && (
+                <span className="text-xs font-medium hidden sm:block max-w-[80px] truncate">
+                  {user.username || user.email?.split("@")[0]}
+                </span>
+              )}
+            </button>
+
+            {/* Dropdown */}
+            {accountMenuOpen && (
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-2xl shadow-xl overflow-hidden z-50 border border-pink-100">
+                {isLoggedIn ? (
+                  <>
+                    {/* User info */}
+                    <div className="px-4 py-3 border-b border-pink-50">
+                      <p className="text-xs text-gray-400">Signed in as</p>
+                      <p className="text-sm font-semibold text-purple-800 truncate">
+                        {user?.email}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => { navigate("/account"); setAccountMenuOpen(false); }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition flex items-center gap-2"
+                    >
+                      👤 My Account
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition flex items-center gap-2 border-t border-pink-50"
+                    >
+                      🚪 Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => { navigate("/account"); setAccountMenuOpen(false); }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition flex items-center gap-2"
+                    >
+                      🔑 Login
+                    </button>
+                    <button
+                      onClick={() => { navigate("/signup"); setAccountMenuOpen(false); }}
+                      className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition flex items-center gap-2 border-t border-pink-50"
+                    >
+                      ✨ Sign Up
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -87,7 +164,7 @@ export default function Navbar({ search, setSearch }) {
           </button>
           <button onClick={() => { navigate("/cart"); setMobileMenuOpen(false); }}
             className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition">
-            🛒 Cart {cart.length > 0 && `(${cart.length})`}
+            🛒 Cart {cartCount > 0 && `(${cartCount})`}
           </button>
         </div>
       )}
