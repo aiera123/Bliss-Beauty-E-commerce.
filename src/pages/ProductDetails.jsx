@@ -98,7 +98,7 @@ export default function ProductDetails() {
                 onClick={() => { addToCart({ name: product.name, price: product.price, image: product.image }); toast.success(`Added: ${product.name}`); }}
                 className="flex-1 py-3 rounded-full text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all"
                 style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}>
-                Add to Cart 🛍️
+                Add to Cart 
               </button>
               <button onClick={() => navigate("/cart")}
                 className="flex-1 py-3 rounded-full text-purple-700 font-semibold border-2 border-purple-200 hover:border-purple-400 hover:bg-purple-50 transition">

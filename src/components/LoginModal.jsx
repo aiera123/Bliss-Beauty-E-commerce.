@@ -119,7 +119,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
             className="w-full py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all duration-200 disabled:opacity-60"
             style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
           >
-            {loading ? "Signing in..." : "Sign In 🌸"}
+            {loading ? "Signing in..." : "Sign In "}
           </button>
 
           {/* Divider */}
@@ -138,7 +138,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
           </button>
 
           <p className="text-center text-xs text-gray-400 mt-4">
-            You need an account to shop with us 💜
+            You need an account to shop with us — it only takes a minute! 😊
           </p>
         </div>
       </div>
