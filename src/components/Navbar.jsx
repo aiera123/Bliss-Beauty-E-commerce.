@@ -6,13 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/StrapiContext";
 
+
+
 export default function Navbar({ search, setSearch }) {
-  const { cartCount } = useCart();
+
   const { user, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountRef = useRef(null);
+  const { cartCount , clearCart } = useCart();
 
   // Close account dropdown when clicking outside
   useEffect(() => {
@@ -27,6 +30,7 @@ export default function Navbar({ search, setSearch }) {
 
   const handleLogout = () => {
     logout();
+    clearCart();
     setAccountMenuOpen(false);
     navigate("/");
   };

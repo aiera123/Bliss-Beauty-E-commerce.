@@ -1,33 +1,43 @@
 // src/context/CartContext.jsx
-// Cart context — shows login popup if customer is not logged in
-
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import LoginModal from "../components/LoginModal";
 
 const CartContext = createContext();
 
-export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [pendingProduct, setPendingProduct] = useState(null); // product waiting to be added
+const CART_KEY = "bliss_beauty_cart";
 
-  // Check if user is logged in via Strapi token
+export function CartProvider({ children }) {
+  // Load cart from localStorage on first render
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem(CART_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [pendingProduct, setPendingProduct] = useState(null);
+
+  // Save cart to localStorage every time it changes
+  useEffect(() => {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }, [cart]);
+
   const isLoggedIn = () => !!localStorage.getItem("strapiToken");
 
   const addToCart = (product) => {
     if (!isLoggedIn()) {
-      // Not logged in — save product and show login popup
       setPendingProduct(product);
       setShowLoginModal(true);
       return;
     }
-    // Logged in — add to cart directly
     actuallyAddToCart(product);
   };
 
   const actuallyAddToCart = (product) => {
     setCart((prev) => {
-      // If product already in cart, increase quantity
       const existing = prev.find((item) => item.name === product.name);
       if (existing) {
         return prev.map((item) =>
@@ -40,7 +50,6 @@ export function CartProvider({ children }) {
     });
   };
 
-  // Called after successful login — adds the pending product
   const handleLoginSuccess = () => {
     if (pendingProduct) {
       actuallyAddToCart(pendingProduct);
@@ -53,10 +62,7 @@ export function CartProvider({ children }) {
   };
 
   const updateQuantity = (productName, quantity) => {
-    if (quantity <= 0) {
-      removeFromCart(productName);
-      return;
-    }
+    if (quantity <= 0) { removeFromCart(productName); return; }
     setCart((prev) =>
       prev.map((item) =>
         item.name === productName ? { ...item, quantity } : item
@@ -64,35 +70,21 @@ export function CartProvider({ children }) {
     );
   };
 
-  const clearCart = () => setCart([]);
+  // Clear cart on logout
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem(CART_KEY);
+  };
 
   const cartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
-  const cartTotal = cart.reduce(
-    (total, item) => total + item.price * (item.quantity || 1),
-    0
-  );
+  const cartTotal = cart.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
 
   return (
-    <CartContext.Provider
-      value={{
-        cart,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        cartCount,
-        cartTotal,
-      }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal }}>
       {children}
-
-      {/* Login modal — shown automatically when needed */}
       {showLoginModal && (
         <LoginModal
-          onClose={() => {
-            setShowLoginModal(false);
-            setPendingProduct(null);
-          }}
+          onClose={() => { setShowLoginModal(false); setPendingProduct(null); }}
           onLoginSuccess={handleLoginSuccess}
         />
       )}

@@ -18,21 +18,18 @@ const categories = [
     items: [
       { label: "Shampoo" },
       { label: "Conditioner" },
-      { label: "Hair Oils" },
-      { label: "Styling" },
-      { label: "Hair Masks" },
-      { label: "Growth Serums" },
+    
     ],
   },
-  {
-    name: "Lifestyle",
-    items: [
-      { label: "Supplements" },
-      { label: "Wellness" },
-      { label: "Sleep Care" },
-      { label: "Nutrition" },
-    ],
-  },
+  // {
+  //   name: "Lifestyle",
+  //   items: [
+  //     { label: "Supplements" },
+  //     { label: "Wellness" },
+  //     { label: "Sleep Care" },
+  //     { label: "Nutrition" },
+  //   ],
+  // },
   {
     name: "Fragrances",
     items: [
@@ -53,25 +50,7 @@ const categories = [
       { label: "Remover" },
     ],
   },
-  {
-    name: "Kid's Fashion",
-    items: [
-      { label: "Tops & Tees" },
-      { label: "Bottoms" },
-      { label: "Dresses" },
-      { label: "Accessories" },
-    ],
-  },
-  {
-    name: "Gadgets",
-    items: [
-      { label: "Skin Devices" },
-      { label: "Hair Tools" },
-      { label: "Massagers" },
-      { label: "Accessories" },
-    ],
-  },
-];
+ ];
 
 export default function CategoryNav() {
   const [activeCategory, setActiveCategory] = useState(null);
