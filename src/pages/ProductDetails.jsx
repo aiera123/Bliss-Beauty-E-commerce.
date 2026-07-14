@@ -15,7 +15,10 @@ const allProducts = [
   { id: 4, name: "Oil",         brand: "Mamaearth",  price: 399,  category: "Hair",       image: oil,         desc: "Natural & nourishing",       rating: 4.0, features: ["100% natural ingredients","Reduces hair fall","Nourishes scalp","No harmful chemicals","Suitable for all hair types"] },
   { id: 5, name: "Blush",       brand: "Lakme",      price: 599,  category: "Makeup",     image: blush,       desc: "Natural flush of color",     rating: 3.8, features: ["Buildable coverage","Long lasting color","Silky smooth texture","Natural flush finish","Blends easily"] },
   { id: 6, name: "Highlighter", brand: "Cetaphil",   price: 699,  category: "Makeup",     image: highlighter, desc: "Add a glow to your look",    rating: 4.3, features: ["Luminous glow finish","Finely milled shimmer","Long lasting highlight","Suitable for all skin tones","Multi-use face & body"] },
-];
+{ id: 7, name: "Lipstick",    brand: "Maybelline", price: 499,  category: "Makeup",     image: lipgloss,    desc: "Rich color & hydration",     rating: 4.1, features: ["Intense color payoff","Moisturizing formula","Long lasting wear","Smooth application","Variety of shades"] },
+{ id: 8, name: "Face Wash",   brand: "Himalaya",   price: 299,  category: "Skin",       image: facecream,   desc: "Gentle cleansing for skin",  rating: 4.4, features: ["Gentle on skin","Removes dirt & oil","Hydrating formula","Suitable for daily use","Dermatologically tested"] },
+{ id: 9, name: "Body Lotion", brand: "Nivea",      price: 399,  category: "Skin",       image: oil,         desc: "Soft & smooth skin",         rating: 4.6, features: ["Deeply moisturizing","Non-greasy formula","Quick absorption","Suitable for all skin types","With natural oils"] },
+{ id: 10,name: "Eyeliner",    brand: "Revlon",     price: 349,  category: "Makeup",     image: blush,       desc: "Precision & long wear",      rating: 4.0, features: ["Precise application","Smudge-proof formula","Long lasting wear","Intense color payoff","Suitable for all eye shapes"] },];
 
 export default function ProductDetails() {
   const { id } = useParams();
