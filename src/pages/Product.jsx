@@ -18,6 +18,7 @@ const allProducts = [
   { id: 4, name: "Oil",         price: 399,  category: "Hair",       sub: "Hair Oil",      brand: "Shea Moisture",  rating: 4.0, skinType: null,     image: oil,         desc: "Natural & nourishing" },
   { id: 5, name: "Blush",       price: 599,  category: "Makeup",     sub: "Blush",         brand: "Lakme",      rating: 3.8, skinType: null,     image: blush,       desc: "Natural flush of color" },
   { id: 6, name: "Highlighter", price: 699,  category: "Makeup",     sub: "Highlighter",   brand: "KayBeauty",   rating: 4.3, skinType: null,     image: highlighter, desc: "Add a glow to your look" },
+
 ];
 
 const sortOptions = [
