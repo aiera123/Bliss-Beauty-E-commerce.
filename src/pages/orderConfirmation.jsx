@@ -11,10 +11,10 @@ export default function OrderConfirmation() {
     <div className="min-h-screen flex items-center justify-center px-4"
       style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 40%, #ede7f6 100%)" }}>
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl overflow-hidden text-center">
-        <div className="h-2" style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }} />
+        <div className="h-2" style={{ background: "linear-gradient(90deg, #e9487d, #ce93d8, #b39ddb)" }} />
         <div className="p-8">
           {/* Success icon */}
-          <div className="text-6xl mb-4">🎉</div>
+          <div className="text-6xl mb-4">✅</div>
           <h1 className="text-2xl font-bold text-purple-900 mb-2">Order Placed!</h1>
           <p className="text-gray-500 mb-6">
             Thank you {name}! Your order has been placed successfully.
@@ -41,14 +41,14 @@ export default function OrderConfirmation() {
           </div>
 
           <p className="text-sm text-gray-400 mb-6">
-            Our team will contact you on your phone number to confirm delivery. 🌸
+            Our team will contact you on your phone number to confirm delivery.
           </p>
 
           {/* Buttons */}
           <div className="space-y-3">
             <button onClick={() => navigate("/products")}
               className="w-full py-3 rounded-full text-white font-semibold shadow-md"
-              style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}>
+              style={{ background: "linear-gradient(90deg, #e9487d, #903d9e)" }}>
               Continue Shopping
             </button>
             <button onClick={() => navigate("/account")}
