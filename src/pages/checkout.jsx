@@ -25,78 +25,78 @@ export default function Checkout() {
   };
 
   const handlePlaceOrder = async () => {
-  if (!form.fullName || !form.phone || !form.address || !form.city) {
-    toast.error("Please fill in all required fields.");
-    return;
-  }
-
-  if (cart.length === 0) {
-    toast.error("Your cart is empty!");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    const orderNumber = "BB-" + Date.now().toString().slice(-6);
-
-    const response = await fetch(
-      `${import.meta.env.VITE_STRAPI_URL}/api/orders`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(localStorage.getItem("strapiToken") && {
-            Authorization: `Bearer ${localStorage.getItem("strapiToken")}`,
-          }),
-        },
-        body: JSON.stringify({
-          data: {
-            orderNumber,
-            status: "Pending",
-            totalAmount: cartTotal,
-            items: cart,
-            shippingAddress: {
-              fullName: form.fullName,
-              phone: form.phone,
-              address: form.address,
-              city: form.city,
-              note: form.note,
-            },
-            userEmail: form.email,
-          },
-        }),
-      }
-    );
-
-    const result = await response.json();
-
-    console.log(result);
-
-    if (!response.ok) {
-      throw new Error(result.error?.message || "Failed to save order");
+    if (!form.fullName || !form.phone || !form.address || !form.city) {
+      toast.error("Please fill in all required fields.");
+      return;
     }
 
-    clearCart();
+    if (cart.length === 0) {
+      toast.error("Your cart is empty!");
+      return;
+    }
 
-    toast.success("Order placed successfully! ");
+    setLoading(true);
 
-    navigate("/order-confirmation", {
-      state: {
-        orderNumber,
-        total: cartTotal,
-        name: form.fullName,
-      },
-    });
+    try {
+      const orderNumber = "BB-" + Date.now().toString().slice(-6);
 
-  } catch (err) {
-    console.error(err);
-    toast.error(err.message || "Something went wrong.");
-  } finally {
-    setLoading(false);
-  }
-};
-}
+      const response = await fetch(
+        `${import.meta.env.VITE_STRAPI_URL}/api/orders`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(localStorage.getItem("strapiToken") && {
+              Authorization: `Bearer ${localStorage.getItem("strapiToken")}`,
+            }),
+          },
+          body: JSON.stringify({
+            data: {
+              orderNumber,
+              status: "Pending",
+              totalAmount: cartTotal,
+              items: cart,
+              shippingAddress: {
+                fullName: form.fullName,
+                phone: form.phone,
+                address: form.address,
+                city: form.city,
+                note: form.note,
+              },
+              userEmail: form.email,
+            },
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      console.log(result);
+
+      if (!response.ok) {
+        throw new Error(result.error?.message || "Failed to save order");
+      }
+
+      clearCart();
+
+      toast.success("Order placed successfully! ");
+
+      navigate("/order-confirmation", {
+        state: {
+          orderNumber,
+          total: cartTotal,
+          name: form.fullName,
+        },
+      });
+
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (cart.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center"
@@ -113,7 +113,7 @@ export default function Checkout() {
       </div>
     );
   }
-  }
+
   return (
     <div className="min-h-screen p-6"
       style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 40%, #ede7f6 100%)" }}>
