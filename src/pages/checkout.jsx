@@ -25,23 +25,24 @@ export default function Checkout() {
   };
 
   const handlePlaceOrder = async () => {
-    // Basic validation
-    if (!form.fullName || !form.phone || !form.address || !form.city) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    if (cart.length === 0) {
-      toast.error("Your cart is empty!");
-      return;
-    }
+  if (!form.fullName || !form.phone || !form.address || !form.city) {
+    toast.error("Please fill in all required fields.");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      // Generate simple order number
-      const orderNumber = "BB-" + Date.now().toString().slice(-6);
+  if (cart.length === 0) {
+    toast.error("Your cart is empty!");
+    return;
+  }
 
-      // Save order to Strapi
-      await fetch(`${import.meta.env.VITE_STRAPI_URL || "http://localhost:1337"}/api/orders`, {
+  setLoading(true);
+
+  try {
+    const orderNumber = "BB-" + Date.now().toString().slice(-6);
+
+    const response = await fetch(
+      `${import.meta.env.VITE_STRAPI_URL}/api/orders`,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +53,7 @@ export default function Checkout() {
         body: JSON.stringify({
           data: {
             orderNumber,
-            status: "pending",
+            status: "Pending",
             totalAmount: cartTotal,
             items: cart,
             shippingAddress: {
@@ -65,21 +66,37 @@ export default function Checkout() {
             userEmail: form.email,
           },
         }),
-      });
+      }
+    );
 
-      clearCart();
-      toast.success("Order placed successfully! 🌸");
-      // Pass order info to confirmation page
-      navigate("/order-confirmation", {
-        state: { orderNumber, total: cartTotal, name: form.fullName },
-      });
-    } catch (err) {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+    const result = await response.json();
+
+    console.log(result);
+
+    if (!response.ok) {
+      throw new Error(result.error?.message || "Failed to save order");
     }
-  };
 
+    clearCart();
+
+    toast.success("Order placed successfully! ");
+
+    navigate("/order-confirmation", {
+      state: {
+        orderNumber,
+        total: cartTotal,
+        name: form.fullName,
+      },
+    });
+
+  } catch (err) {
+    console.error(err);
+    toast.error(err.message || "Something went wrong.");
+  } finally {
+    setLoading(false);
+  }
+};
+}
   if (cart.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center"
@@ -96,7 +113,7 @@ export default function Checkout() {
       </div>
     );
   }
-
+  }
   return (
     <div className="min-h-screen p-6"
       style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 40%, #ede7f6 100%)" }}>
