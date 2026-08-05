@@ -1,4 +1,3 @@
-// src/pages/Checkout.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
@@ -53,7 +52,7 @@ export default function Checkout() {
           body: JSON.stringify({
             data: {
               orderNumber,
-              status: "Pending",
+              statuss: "Pending",
               totalAmount: cartTotal,
               items: cart,
               shippingAddress: {
@@ -70,7 +69,7 @@ export default function Checkout() {
       );
 
       const result = await response.json();
-
+   console.log("Response:", result);
       console.log(result);
 
       if (!response.ok) {
@@ -217,7 +216,7 @@ export default function Checkout() {
           className="w-full py-4 rounded-full text-white font-bold text-lg shadow-lg hover:scale-[1.02] transition-all disabled:opacity-60"
           style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }}
         >
-          {loading ? "Placing Order..." : "Place Order 🌸"}
+          {loading ? "Placing Order..." : "Place Order →"}
         </button>
       </div>
     </div>
