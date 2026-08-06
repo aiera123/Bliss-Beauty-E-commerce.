@@ -54,7 +54,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
         {/* Top accent bar */}
         <div
           className="h-2 w-full"
-          style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }}
+          style={{ background: "linear-gradient(90deg, #f73e7c, #ce93d8, #b39ddb)" }}
         />
 
         <div className="px-8 py-7">
@@ -117,7 +117,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
             onClick={handleSubmit}
             disabled={loading}
             className="w-full py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-100 transition-all duration-200 disabled:opacity-60"
-            style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
+            style={{ background: "linear-gradient(90deg, #860d35, #a056ad)" }}
           >
             {loading ? "Signing in..." : "Sign In "}
           </button>

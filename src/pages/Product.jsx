@@ -192,7 +192,7 @@ export default function Product({ search = "" }) {
                           toast.success(`Added: ${item.name}`);
                         }}
                         className="flex-1 py-2 rounded-xl text-xs font-semibold text-white transition hover:opacity-90"
-                        style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
+                        style={{ background: "linear-gradient(90deg, #da1557, #961eac)" }}
                       >
                         Add to Cart
                       </button>

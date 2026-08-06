@@ -67,7 +67,7 @@ export default function Account() {
             </div>
             <button onClick={handleLogin} disabled={loading}
               className="w-full py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 disabled:opacity-60"
-              style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}>
+              style={{ background: "linear-gradient(90deg, #f50c59, #ce93d8)" }}>
               {loading ? "Signing in..." : "Sign In 🌸"}
             </button>
             <div className="flex items-center gap-3 my-5">

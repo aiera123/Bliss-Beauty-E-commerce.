@@ -58,7 +58,7 @@ export default function ProductDetails() {
 
           {/* Image */}
           <div className="flex items-center justify-center p-8"
-            style={{ background: "linear-gradient(135deg, #fff0f5, #f3e5f5)" }}>
+            style={{ background: "linear-gradient(135deg, #fff0f5, #f0cef5)" }}>
             <img src={product.image} alt={product.name}
               className="w-full max-w-xs object-contain rounded-2xl shadow-md"
               style={{ height: "300px" }} />
@@ -100,7 +100,7 @@ export default function ProductDetails() {
               <button
                 onClick={() => { addToCart({ name: product.name, price: product.price, image: product.image }); toast.success(`Added: ${product.name}`); }}
                 className="flex-1 py-3 rounded-full text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all"
-                style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}>
+                style={{ background: "linear-gradient(90deg, #f5276b, #b547c9)" }}>
                 Add to Cart 
               </button>
               <button onClick={() => navigate("/cart")}
