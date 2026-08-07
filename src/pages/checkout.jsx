@@ -101,7 +101,6 @@ export default function Checkout() {
       <div className="min-h-screen flex items-center justify-center"
         style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%)" }}>
         <div className="text-center">
-          <p className="text-5xl mb-4">🛒</p>
           <p className="text-gray-500 mb-4">Your cart is empty</p>
           <button onClick={() => navigate("/products")}
             className="px-6 py-3 rounded-full text-white font-semibold"
@@ -214,9 +213,9 @@ export default function Checkout() {
           onClick={handlePlaceOrder}
           disabled={loading}
           className="w-full py-4 rounded-full text-white font-bold text-lg shadow-lg hover:scale-[1.02] transition-all disabled:opacity-60"
-          style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }}
+          style={{ background: "linear-gradient(90deg, #9e556d, #a556b3, #421d86)" }}
         >
-          {loading ? "Placing Order..." : "Place Order →"}
+          {loading ? "Placing Order..." : "Place Order"}
         </button>
       </div>
     </div>
