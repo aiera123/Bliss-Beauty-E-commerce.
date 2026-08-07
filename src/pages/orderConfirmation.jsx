@@ -13,9 +13,7 @@ export default function OrderConfirmation() {
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl overflow-hidden text-center">
         <div className="h-2" style={{ background: "linear-gradient(90deg, #e9487d, #ce93d8, #b39ddb)" }} />
         <div className="p-8">
-          {/* Success icon */}
-          <div className="text-6xl mb-4">✅</div>
-          <h1 className="text-2xl font-bold text-purple-900 mb-2">Order Placed!</h1>
+    <h1 className="text-2xl font-bold text-purple-900 mb-2">Order Placed!</h1>
           <p className="text-gray-500 mb-6">
             Thank you {name}! Your order has been placed successfully.
           </p>

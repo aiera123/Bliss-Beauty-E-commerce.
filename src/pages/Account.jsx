@@ -68,7 +68,7 @@ export default function Account() {
             <button onClick={handleLogin} disabled={loading}
               className="w-full py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 disabled:opacity-60"
               style={{ background: "linear-gradient(90deg, #f50c59, #ce93d8)" }}>
-              {loading ? "Signing in..." : "Sign In 🌸"}
+              {loading ? "Signing in..." : "Sign In"}
             </button>
             <div className="flex items-center gap-3 my-5">
               <div className="flex-1 h-px bg-pink-200" />
@@ -98,7 +98,7 @@ export default function Account() {
             {user?.username?.[0]?.toUpperCase() || "A"}
           </div>
           <div className="flex-1">
-            <h2 className="text-lg font-bold text-purple-900">{user?.username || "User"} 🌸</h2>
+            <h2 className="text-lg font-bold text-purple-900">{user?.username || "User"} </h2>
             <p className="text-sm text-gray-400">{user?.email}</p>
           </div>
           <button onClick={handleLogout}
@@ -146,7 +146,7 @@ export default function Account() {
                         {item.image ? (
                           <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-2xl">🌸</div>
+                          <div className="w-full h-full flex items-center justify-center text-2xl"></div>
                         )}
                       </div>
 
@@ -190,7 +190,7 @@ export default function Account() {
                     <button onClick={() => navigate("/cart")}
                       className="flex-1 py-3 rounded-full text-white font-semibold text-sm shadow-md"
                       style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}>
-                      Checkout 🛍️
+                      Checkout 
                     </button>
                     <button onClick={clearCart}
                       className="px-4 py-3 rounded-full text-red-400 font-semibold text-sm border-2 border-red-100 hover:bg-red-50 transition">
