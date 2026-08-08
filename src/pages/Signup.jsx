@@ -52,7 +52,6 @@ export default function Signup() {
         <div className="px-8 py-8">
           {/* Header */}
           <div className="text-center mb-6">
-            <div className="text-4xl mb-2">🌸</div>
             <h2 className="text-2xl font-bold text-purple-900">Create Account</h2>
             <p className="text-sm text-pink-400 mt-1">Join Bliss & Beauty today</p>
           </div>
