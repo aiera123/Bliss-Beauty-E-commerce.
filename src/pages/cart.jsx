@@ -75,9 +75,9 @@ export default function Cart() {
           <button
             onClick={() => navigate("/checkout")}
             className="w-full py-3 rounded-full text-white font-semibold text-lg shadow-lg hover:scale-105 transition-all"
-            style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }}
+            style={{ background: "linear-gradient(90deg, #f05c8d, #8d5197, #785ea8)" }}
           >
-            Checkout →
+            Checkout
           </button>
         </div>
       )}
