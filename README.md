@@ -56,13 +56,14 @@ The project follows a Headless CMS architecture where React handles the frontend
 
 ### Authentication
 
-* Firebase Authentication
+Implemented user registration and login using **Strapi Authentication APIs and REST API integration**, with authentication state managed through React Context API.
+
 
 ### Backend
 
 * Strapi Headless CMS
 
-### Database
+### Database(planned)
 
 * PostgreSQL (via Strapi)
 
