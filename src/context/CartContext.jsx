@@ -28,13 +28,15 @@ export function CartProvider({ children }) {
   const isLoggedIn = () => !!localStorage.getItem("strapiToken");
 
   const addToCart = (product) => {
-    if (!isLoggedIn()) {
-      setPendingProduct(product);
-      setShowLoginModal(true);
-      return;
-    }
-    actuallyAddToCart(product);
-  };
+  if (!isLoggedIn()) {
+    setPendingProduct(product);
+    setShowLoginModal(true);
+    return false;
+  }
+
+  actuallyAddToCart(product);
+  return true;
+};
 
   const actuallyAddToCart = (product) => {
     setCart((prev) => {

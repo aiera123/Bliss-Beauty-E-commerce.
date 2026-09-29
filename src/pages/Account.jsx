@@ -44,7 +44,7 @@ export default function Account() {
           <div className="h-2" style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8, #b39ddb)" }} />
           <div className="px-8 py-8">
             <div className="text-center mb-6">
-              <div className="text-4xl mb-2">👩🏻‍💼</div>
+              <div className="text-4xl mb-2">👤</div>
               <h2 className="text-2xl font-bold text-purple-900">My Account</h2>
               <p className="text-sm text-pink-400 mt-1">Sign in to view your cart & profile</p>
             </div>

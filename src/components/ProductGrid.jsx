@@ -22,8 +22,7 @@ const ProductGrid = ({ filters = {}, title }) => {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-4xl mb-3">😔</p>
-        <p className="text-gray-500 font-medium">Couldn't load products</p>
+<p className="text-gray-500 font-medium">Couldn't load products</p>
         <p className="text-gray-400 text-sm mt-1">{error}</p>
         <p className="text-gray-400 text-xs mt-2">Make sure Strapi is running at localhost:1337</p>
       </div>
@@ -46,7 +45,7 @@ const ProductGrid = ({ filters = {}, title }) => {
 
       {!loading && products.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-4xl mb-3">🌸</p>
+          <p className="text-4xl mb-3"></p>
           <p className="text-gray-500">No products found</p>
         </div>
       )}

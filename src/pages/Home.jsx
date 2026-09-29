@@ -134,14 +134,20 @@ export default function Home() {
         <p className="text-purple-700 font-semibold mt-1">Rs. {product.price}</p>
         <button
           onClick={() => {
-            addToCart({ name: product.name, price: product.price, image: product.imageUrl });
-            toast.success(`Added to cart: ${product.name}`);
+            const added = addToCart({
+              name: product.name,
+              price: product.price,
+              image: product.imageUrl || lipgloss,
+            });
+            if (added) {
+              toast.success("Added to cart: " + product.name);
+            }
           }}
-          className="mt-4 px-6 py-2 rounded-full text-white text-sm font-semibold shadow hover:shadow-md hover:scale-105 transition-all duration-200"
-          style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
+          className="mt-3 px-6 py-2 rounded-full text-white font-semibold transition hover:opacity-90"
+          style={{ background: "linear-gradient(90deg, #c94a74, #db6eee)" }}
         >
           Add to Cart
-        </button>
+        </button> 
       </div>
     ))
   )}

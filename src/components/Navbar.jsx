@@ -100,7 +100,7 @@ export default function Navbar({ search, setSearch }) {
               onClick={() => setAccountMenuOpen(!accountMenuOpen)}
               className="flex items-center gap-1.5 p-2 rounded-lg hover:bg-white/10 transition"
             >
-              <span className="text-xl">👩🏻‍💼</span>
+              <span className="text-xl">👤</span>
               {isLoggedIn && user && (
                 <span className="text-xs font-medium hidden sm:block max-w-[80px] truncate">
                   {user.username || user.email?.split("@")[0]}
@@ -145,7 +145,7 @@ export default function Navbar({ search, setSearch }) {
                       onClick={() => { navigate("/signup"); setAccountMenuOpen(false); }}
                       className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-pink-50 transition flex items-center gap-2 border-t border-pink-50"
                     >
-                      ✨ Sign Up
+                       Sign Up
                     </button>
                   </>
                 )}
@@ -164,7 +164,7 @@ export default function Navbar({ search, setSearch }) {
           </button>
           <button onClick={() => { navigate("/products"); setMobileMenuOpen(false); }}
             className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition">
-            🛍️ Products
+             Products
           </button>
           <button onClick={() => { navigate("/cart"); setMobileMenuOpen(false); }}
             className="text-left text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition">

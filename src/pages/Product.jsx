@@ -188,11 +188,16 @@ export default function Product({ search = "" }) {
                       </button>
                       <button
                         onClick={() => {
-                          addToCart({ name: item.name, price: item.price, image: item.image });
+                          addToCart({ name: item.name,
+                             price: item.price,
+                              image: item.image,
+                             });
+                             if(added){
                           toast.success(`Added: ${item.name}`);
                         }}
+                      }
                         className="flex-1 py-2 rounded-xl text-xs font-semibold text-white transition hover:opacity-90"
-                        style={{ background: "linear-gradient(90deg, #da1557, #961eac)" }}
+                        style={{ background: "linear-gradient(90deg, #c94a74, #c43edb)" }}
                       >
                         Add to Cart
                       </button>

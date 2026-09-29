@@ -32,7 +32,7 @@ export default function ProductDetails() {
       <div className="min-h-screen flex items-center justify-center"
         style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%)" }}>
         <div className="text-center">
-          <p className="text-6xl mb-4">🌸</p>
+          <p className="text-6xl mb-4"></p>
           <h2 className="text-2xl font-bold text-purple-900 mb-2">Product not found</h2>
           <button onClick={() => navigate("/products")}
             className="mt-4 px-6 py-3 rounded-full text-white font-semibold"

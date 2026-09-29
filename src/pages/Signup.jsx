@@ -113,7 +113,7 @@ export default function Signup() {
               className="w-full py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200 disabled:opacity-60 mt-2"
               style={{ background: "linear-gradient(90deg, #f48fb1, #ce93d8)" }}
             >
-              {loading ? "Creating account..." : "Sign Up 🌸"}
+              {loading ? "Creating account..." : "Sign Up "}
             </button>
           </form>
 
