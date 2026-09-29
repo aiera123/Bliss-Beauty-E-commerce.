@@ -56,13 +56,14 @@ The project follows a Headless CMS architecture where React handles the frontend
 
 ### Authentication
 
-* Firebase Authentication
+Implemented user registration and login using **Strapi Authentication APIs and REST API integration**, with authentication state managed through React Context API.
+
 
 ### Backend
 
 * Strapi Headless CMS
 
-### Database
+### Database(planned)
 
 * PostgreSQL (via Strapi)
 
@@ -155,8 +156,21 @@ This project is being developed to gain practical experience in:
 ---
 
 ## 📸 Screenshots
+<img width="440" height="571" alt="image" src="https://github.com/user-attachments/assets/45b00613-3c3b-4b70-9373-8390f0f27a82" />
+<img width="440" height="571" alt="image" src="https://github.com/user-attachments/assets/2a61ad3c-2ea1-4365-b7bf-c724469ff2a6" />
+<img width="439" height="549" alt="image" src="https://github.com/user-attachments/assets/6a6b6f43-e4d0-4fcc-9003-dfac154179c0" />
+<img width="477" height="599" alt="image" src="https://github.com/user-attachments/assets/6ab53556-57dc-4770-9de4-fc7f92add35a" />
+<img width="1366" height="721" alt="image" src="https://github.com/user-attachments/assets/649ebd1a-870f-4ae2-8119-3f5da547194a" />
+<img width="380" height="648" alt="image" src="https://github.com/user-attachments/assets/4461af80-b142-4ec1-8905-26895e98e8a7" />
+<img width="1340" height="644" alt="image" src="https://github.com/user-attachments/assets/1f7b6495-132c-4a31-889f-2d097cc22326" />
+<img width="1190" height="584" alt="image" src="https://github.com/user-attachments/assets/d67611bf-2690-473c-9e19-ed8670628908" />
+<img width="1366" height="649" alt="image" src="https://github.com/user-attachments/assets/dcf51a00-62ad-4a91-a018-02aa093b04cd" />
+<img width="640" height="520" alt="image" src="https://github.com/user-attachments/assets/87eb5131-4034-4278-8a65-abd47093cf6e" />
+<img width="425" height="543" alt="image" src="https://github.com/user-attachments/assets/116b2d9a-5c21-4a4b-880b-a22334fbf99d" />
+<img width="280" height="419" alt="image" src="https://github.com/user-attachments/assets/134963a5-3d56-42ce-94a6-1ee201dd568a" />
+<img width="409" height="555" alt="image" src="https://github.com/user-attachments/assets/a1d9f9ed-9e49-4046-981b-be6a0cd25ade" />
 
-Screenshots will be added soon !!
+
 
 ---
 
